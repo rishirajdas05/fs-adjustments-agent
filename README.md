@@ -87,4 +87,8 @@ Design rules the code enforces:
 
 ## Use of AI tools
 
-Built with Claude as a pair programmer. Details, including where it led me wrong, are in the reflection.
+## Use of AI tools
+
+I used Claude as an AI pair programmer, as the brief encourages. It helped analyse the input data, write much of the code and tests, and draft the documentation.
+
+My part: reviewing the accounting decisions (what is rejected vs held, which rules can never be overridden), choosing the prototype slice, writing the clarifying questions, running and testing the project on my own machine, and preparing the submission. The reflection describes where the AI helped and where its output had to be corrected.
