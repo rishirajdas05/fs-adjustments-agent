@@ -19,7 +19,7 @@
 **How I used AI tools.** I used Claude as an agentic pair programmer through the whole task.
 - **Where it helped:** it wrote a probe script that found most of the defects in minutes, including the ones the PDF does not list (the prior TB is out of balance, retained earnings does not roll, JE-003 matches no rate). It also drafted most of the boilerplate (loaders, writers, CLI) and the first version of the tests.
 - **Where I had to correct it:**
-  - The first version of the fix generator said "every option has been re-checked against the rules" in the report, but the balance repairs for JE-002 were never re-validated. A test I asked for caught it, and I moved re-validation to one choke point that every candidate has to pass.
+  - The first version of the fix generator said "every option has been re-checked against the rules" in the report, but the balance repairs for JE-002 were never re-validated. A test caught it, and re-validation was moved to one choke point that every candidate has to pass.
   - The obvious nearest mapping for 6315 is 6310, which would have turned JE-005 into a no-op entry. I made sure that case is discarded and shown to the reviewer rather than offered.
   - It treated "unbalanced after FX rounding" at face value. The numbers say the gap is 182k, not rounding, so I turned that into a clarifying question.
   - It produced output that was not deterministic (set ordering in an account label), which would have broken the idempotency test.
