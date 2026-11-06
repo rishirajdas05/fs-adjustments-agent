@@ -1,0 +1,17 @@
+{
+  "policy_version": "2024Q4-v1",
+  "period": "2024-Q4",
+  "period_start": "2024-10-01",
+  "period_end": "2024-12-31",
+  "bs_rate": "period_end",
+  "pl_rate": "period_average",
+  "fallback_order": ["period_average", "opening"],
+  "system_remeasures_monetary_fx": true,
+  "fx_reval_tolerance": "1.00",
+  "fx_reval_keywords": ["fx reval", "revaluation", "remeasure"],
+  "fx_reval_gain_loss_accounts": ["7300", "7310"],
+  "intercompany_accounts": ["2170"],
+  "materiality_pct_of_pretax_income": "0.05",
+  "never_plug_to": ["9999"],
+  "max_self_correction_passes": 5
+}

@@ -1,0 +1,34 @@
+{
+  "run_id": "9c17022d161a6bfc",
+  "code_version": "0.1.0",
+  "code_sha256": "2920bdde019d95ac238ae7c504021a43c9b867bbf7ba91962edd60280707f95d",
+  "period": "2024-Q4",
+  "functional_currency": "USD",
+  "input_sha256": {
+    "chart_of_accounts.csv": "1139711bd276b2d443ab83b9a6461b3e1f62a26416962b0dcd0e0762028e49bf",
+    "trial_balance.csv": "6a5d38f4a7792e5a749d62ec34be8c2aa29f540ccf3c95caedf3e1f1b5203ca8",
+    "fx_rates.csv": "268c9b9b5a14ea5533e596ed8872f1c3b5515c92a46c9b197a10ef9f909d1893",
+    "manual_adjustments.json": "26fcad0c0c7bda5306efea47e0c73238b2828b5d30afdd1bb0d54bb6a6704a0f",
+    "policy.json": "4431c8c117164c5e31504ecfea1b79401a3925dd5dc4fd727b7088f212cac33f",
+    "overrides.json": "f452360833063c3861832232475697fe59a98578f1557ac8f46554f20dce919c"
+  },
+  "policy_version": "2024Q4-v1",
+  "explainer": "template",
+  "invariants": {
+    "pass": 1,
+    "I1_each_posted_entry_balances": true,
+    "I2_batch_does_not_change_tb_net": true,
+    "I3_every_account_delta_equals_sum_of_posted_lines": true,
+    "I4_every_posted_line_hits_a_coa_account": true,
+    "I5_every_adjustment_traces_to_a_source_line": true,
+    "abnormal_balance_flips": [],
+    "pre_tb_net_usd": "182460.20",
+    "post_tb_net_usd": "182460.20"
+  },
+  "counts": {
+    "ACCEPTED": 6,
+    "ACCEPTED_WITH_WARNINGS": 2,
+    "QUARANTINED": 0,
+    "REJECTED": 2
+  }
+}

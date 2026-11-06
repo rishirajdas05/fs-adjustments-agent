@@ -1,0 +1,529 @@
+[
+  {
+    "entry_id": "JE-001",
+    "status": "ACCEPTED",
+    "findings": [
+      {
+        "code": "JE_MATERIAL",
+        "severity": "WARNING",
+        "entry_id": "JE-001",
+        "title": "Entry is above the materiality threshold and needs reviewer sign-off",
+        "facts": {
+          "amount": "850000.00",
+          "threshold": "340325.00",
+          "basis": "5% of pre-tax income 6,806,500.00"
+        },
+        "refs": []
+      }
+    ],
+    "proposed_fixes": [],
+    "ruled_out": [],
+    "explanation": "**JE-001: Accrue Q4 bonus pool**\nAccepted. Will post as submitted.\nBefore sign-off, note:\n- At 850,000.00 it is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00), so a reviewer must sign it off before the statements are released.\nHuman decision: sign_off by controller@example.test (DEMO: bonus pool agreed to the HR workbook v3). Result: ACCEPTED (warnings signed off).",
+    "explanation_source": "template",
+    "override": {
+      "action": "sign_off",
+      "approver": "controller@example.test",
+      "reason": "DEMO: bonus pool agreed to the HR workbook v3",
+      "result": "ACCEPTED (warnings signed off)"
+    },
+    "posted_lines": [
+      {
+        "account": "6100",
+        "debit": "850000.00",
+        "credit": "0.00",
+        "source": "manual_adjustments.json#entries[0].lines[0]"
+      },
+      {
+        "account": "2120",
+        "debit": "0.00",
+        "credit": "850000.00",
+        "source": "manual_adjustments.json#entries[0].lines[1]"
+      }
+    ]
+  },
+  {
+    "entry_id": "JE-002",
+    "status": "ACCEPTED_WITH_WARNINGS",
+    "findings": [
+      {
+        "code": "JE_TOUCHES_FLAGGED_ACCOUNT",
+        "severity": "WARNING",
+        "entry_id": "JE-002",
+        "title": "Account 6310 has an open data-quality issue in the TB (TB_DUPLICATE_ACCOUNT_ROW)",
+        "facts": {
+          "account": "6310",
+          "issues": [
+            "TB_DUPLICATE_ACCOUNT_ROW"
+          ]
+        },
+        "refs": []
+      }
+    ],
+    "proposed_fixes": [
+      {
+        "fix_id": "JE-002-FIX-A",
+        "entry_id": "JE-002",
+        "summary": "Make both sides 28,500.00 (change the credit line)",
+        "confidence": 0.5,
+        "lines": [
+          {
+            "account": "6300",
+            "debit": "28500.00",
+            "credit": "0.00",
+            "memo": "Move from T&E"
+          },
+          {
+            "account": "6310",
+            "debit": "0.00",
+            "credit": "28500.00",
+            "memo": "Reverse from T&E"
+          }
+        ],
+        "rationale": "A reclass moves one amount from one account to another, so both sides should be equal. Nothing in the inputs says which figure is right; the source document ('Controller note 2024-12-28') has to settle it.",
+        "revalidated": true,
+        "revalidation_notes": [
+          "Passes all blocking rules"
+        ],
+        "requires_coa_change": false
+      },
+      {
+        "fix_id": "JE-002-FIX-B",
+        "entry_id": "JE-002",
+        "summary": "Make both sides 25,000.00 (change the debit line)",
+        "confidence": 0.5,
+        "lines": [
+          {
+            "account": "6300",
+            "debit": "25000.00",
+            "credit": "0.00",
+            "memo": "Move from T&E"
+          },
+          {
+            "account": "6310",
+            "debit": "0.00",
+            "credit": "25000.00",
+            "memo": "Reverse from T&E"
+          }
+        ],
+        "rationale": "A reclass moves one amount from one account to another, so both sides should be equal. Nothing in the inputs says which figure is right; the source document ('Controller note 2024-12-28') has to settle it.",
+        "revalidated": true,
+        "revalidation_notes": [
+          "Passes all blocking rules"
+        ],
+        "requires_coa_change": false
+      }
+    ],
+    "ruled_out": [
+      "Plugging the difference to suspense (9999) was not offered: it would hide the error rather than fix it"
+    ],
+    "explanation": "**JE-002: Reclassify marketing spend wrongly booked to T&E**\nAccepted, pending reviewer sign-off. Will post, but someone needs to acknowledge the points below.\nBefore sign-off, note:\n- Account 6310 has an open data-quality issue in the trial balance (TB_DUPLICATE_ACCOUNT_ROW). Check the entry still makes sense once that is resolved.\nOptions (none are applied automatically; each has been re-checked against the same rules):\n- JE-002-FIX-A (confidence 50%): Make both sides 28,500.00 (change the credit line). A reclass moves one amount from one account to another, so both sides should be equal. Nothing in the inputs says which figure is right; the source document ('Controller note 2024-12-28') has to settle it.\n- JE-002-FIX-B (confidence 50%): Make both sides 25,000.00 (change the debit line). A reclass moves one amount from one account to another, so both sides should be equal. Nothing in the inputs says which figure is right; the source document ('Controller note 2024-12-28') has to settle it.\nConsidered and ruled out:\n- Plugging the difference to suspense (9999) was not offered: it would hide the error rather than fix it\nHuman decision: apply_fix by controller@example.test (DEMO: assume controller note shows 28,500). Result: ACCEPTED_WITH_WARNINGS with JE-002-FIX-A.",
+    "explanation_source": "template",
+    "override": {
+      "action": "apply_fix",
+      "fix_id": "JE-002-FIX-A",
+      "approver": "controller@example.test",
+      "reason": "DEMO: assume controller note shows 28,500",
+      "result": "ACCEPTED_WITH_WARNINGS with JE-002-FIX-A"
+    },
+    "posted_lines": [
+      {
+        "account": "6300",
+        "debit": "28500.00",
+        "credit": "0.00",
+        "source": "overrides.json#JE-002->JE-002-FIX-A:JE-002.lines[0]"
+      },
+      {
+        "account": "6310",
+        "debit": "0.00",
+        "credit": "28500.00",
+        "source": "overrides.json#JE-002->JE-002-FIX-A:JE-002.lines[1]"
+      }
+    ]
+  },
+  {
+    "entry_id": "JE-003",
+    "status": "REJECTED",
+    "findings": [
+      {
+        "code": "JE_FX_REVAL_MISMATCH",
+        "severity": "FIXABLE",
+        "entry_id": "JE-003",
+        "title": "Revaluation amount does not match any recomputation from fx_rates.csv",
+        "facts": {
+          "currency": "EUR",
+          "local_balance": "825400.00",
+          "period_end_rate": "1.095",
+          "posted": "11200.00",
+          "recomputed": {
+            "period_average": "10730.20",
+            "opening": "19809.60"
+          },
+          "rates": {
+            "period_average": "1.082",
+            "opening": "1.071"
+          }
+        },
+        "refs": [
+          "manual_adjustments.json#entries[2].lines[0]",
+          "trial_balance.csv#row 2",
+          "trial_balance.csv#row 3",
+          "trial_balance.csv#row 4"
+        ]
+      },
+      {
+        "code": "JE_FX_REVAL_DOUBLE_COUNT",
+        "severity": "FIXABLE",
+        "entry_id": "JE-003",
+        "title": "The pipeline already translates EUR balances at the period-end rate, so a manual revaluation would be counted twice",
+        "facts": {
+          "currency": "EUR",
+          "account": "1110"
+        },
+        "refs": [
+          "manual_adjustments.json#entries[2].lines[0]"
+        ]
+      }
+    ],
+    "proposed_fixes": [
+      {
+        "fix_id": "JE-003-FIX-A",
+        "entry_id": "JE-003",
+        "summary": "Withdraw the entry and let the pipeline remeasure the balance",
+        "confidence": 0.6,
+        "lines": null,
+        "rationale": "The translation step already values the foreign balance at the period-end rate. Posting this as well would book the gain twice. Right only if the TB carries this balance in transaction currency (see clarifying question 1).",
+        "revalidated": true,
+        "revalidation_notes": [
+          "Drop-entry fix: nothing to post, nothing to validate"
+        ],
+        "requires_coa_change": false
+      },
+      {
+        "fix_id": "JE-003-FIX-B",
+        "entry_id": "JE-003",
+        "summary": "Restate to 10,730.20 (period average to period-end basis)",
+        "confidence": 0.25,
+        "lines": [
+          {
+            "account": "1110",
+            "debit": "10730.20",
+            "credit": "0.00",
+            "memo": "EUR cash uplift"
+          },
+          {
+            "account": "7310",
+            "debit": "0.00",
+            "credit": "10730.20",
+            "memo": "Unrealized FX gain"
+          }
+        ],
+        "rationale": "825,400.00 EUR x (1.095 - 1.082). Right only if the ledger carries this balance at the period average rate.",
+        "revalidated": true,
+        "revalidation_notes": [
+          "Passes all blocking rules"
+        ],
+        "requires_coa_change": false
+      },
+      {
+        "fix_id": "JE-003-FIX-C",
+        "entry_id": "JE-003",
+        "summary": "Restate to 19,809.60 (opening to period-end basis)",
+        "confidence": 0.15,
+        "lines": [
+          {
+            "account": "1110",
+            "debit": "19809.60",
+            "credit": "0.00",
+            "memo": "EUR cash uplift"
+          },
+          {
+            "account": "7310",
+            "debit": "0.00",
+            "credit": "19809.60",
+            "memo": "Unrealized FX gain"
+          }
+        ],
+        "rationale": "825,400.00 EUR x (1.095 - 1.071). Right only if the ledger carries this balance at the opening rate.",
+        "revalidated": true,
+        "revalidation_notes": [
+          "Passes all blocking rules"
+        ],
+        "requires_coa_change": false
+      }
+    ],
+    "ruled_out": [],
+    "explanation": "**JE-003: FX revaluation of EUR cash balance to period-end rate**\nRejected. Not posted, and there is no safe automatic fix. The preparer needs to resubmit.\nWhat is wrong:\n- The posted revaluation is 11,200.00. Recomputing it from fx_rates.csv for 825,400.00 EUR at the period-end rate 1.095 gives 19,809.60 from the opening rate 1.071 or 10,730.20 from the period average rate 1.082. Neither matches, so the source calculation needs checking.\n- The system already converts EUR balances at the period-end rate when it builds the statements, so this entry would book the same gain a second time.\nOptions (none are applied automatically; each has been re-checked against the same rules):\n- JE-003-FIX-A (confidence 60%): Withdraw the entry and let the pipeline remeasure the balance. The translation step already values the foreign balance at the period-end rate. Posting this as well would book the gain twice. Right only if the TB carries this balance in transaction currency (see clarifying question 1).\n- JE-003-FIX-B (confidence 25%): Restate to 10,730.20 (period average to period-end basis). 825,400.00 EUR x (1.095 - 1.082). Right only if the ledger carries this balance at the period average rate.\n- JE-003-FIX-C (confidence 15%): Restate to 19,809.60 (opening to period-end basis). 825,400.00 EUR x (1.095 - 1.071). Right only if the ledger carries this balance at the opening rate.\nNext step: the preparer should confirm what the entry was meant to do and submit a new one.\nHuman decision: apply_fix by controller@example.test (DEMO: pipeline remeasures EUR cash, manual reval withdrawn). Result: REJECTED (withdrawn by approver, pipeline handles it).",
+    "explanation_source": "template",
+    "override": {
+      "action": "apply_fix",
+      "fix_id": "JE-003-FIX-A",
+      "approver": "controller@example.test",
+      "reason": "DEMO: pipeline remeasures EUR cash, manual reval withdrawn",
+      "result": "REJECTED (withdrawn by approver, pipeline handles it)"
+    },
+    "posted_lines": []
+  },
+  {
+    "entry_id": "JE-004",
+    "status": "ACCEPTED",
+    "findings": [],
+    "proposed_fixes": [],
+    "ruled_out": [],
+    "explanation": "**JE-004: Bad debt provision top-up**\nAccepted. Will post as submitted.\nAll checks passed: balanced, valid accounts, in period, below materiality.",
+    "explanation_source": "template",
+    "override": null,
+    "posted_lines": [
+      {
+        "account": "6600",
+        "debit": "45000.00",
+        "credit": "0.00",
+        "source": "manual_adjustments.json#entries[3].lines[0]"
+      },
+      {
+        "account": "1121",
+        "debit": "0.00",
+        "credit": "45000.00",
+        "source": "manual_adjustments.json#entries[3].lines[1]"
+      }
+    ]
+  },
+  {
+    "entry_id": "JE-005",
+    "status": "ACCEPTED_WITH_WARNINGS",
+    "findings": [
+      {
+        "code": "JE_ACCOUNT_NO_TB_BALANCE",
+        "severity": "INFO",
+        "entry_id": "JE-005",
+        "title": "Account 6315 has no balance in the current TB",
+        "facts": {
+          "account": "6315"
+        },
+        "refs": [
+          "proposed_fix#JE-005.lines[0]"
+        ]
+      },
+      {
+        "code": "JE_TOUCHES_FLAGGED_ACCOUNT",
+        "severity": "WARNING",
+        "entry_id": "JE-005",
+        "title": "Account 6310 has an open data-quality issue in the TB (TB_DUPLICATE_ACCOUNT_ROW)",
+        "facts": {
+          "account": "6310",
+          "issues": [
+            "TB_DUPLICATE_ACCOUNT_ROW"
+          ]
+        },
+        "refs": []
+      }
+    ],
+    "proposed_fixes": [
+      {
+        "fix_id": "JE-005-FIX-A",
+        "entry_id": "JE-005",
+        "summary": "Keep 6315 and add it to the COA as 'Conference Travel' under 6000 Operating Expenses",
+        "confidence": 0.4,
+        "lines": [
+          {
+            "account": "6315",
+            "debit": "18500.00",
+            "credit": "0.00",
+            "memo": "Conf travel"
+          },
+          {
+            "account": "6310",
+            "debit": "0.00",
+            "credit": "18500.00",
+            "memo": "Out of T&E"
+          }
+        ],
+        "rationale": "The description ('Reclass conference travel from old code') suggests 6315 is a deliberate new sub-account. That is a COA change and needs the COA owner's approval.",
+        "revalidated": true,
+        "revalidation_notes": [
+          "Passes all blocking rules"
+        ],
+        "requires_coa_change": true
+      }
+    ],
+    "ruled_out": [
+      "Mapping 6315 to 6310 Travel and Entertainment (score 0.533) was discarded on re-validation: JE_NO_NET_EFFECT: Every account in the entry is debited and credited by the same amount, so it changes nothing"
+    ],
+    "explanation": "**JE-005: Reclass conference travel from old code**\nAccepted, pending reviewer sign-off. Will post, but someone needs to acknowledge the points below.\nBefore sign-off, note:\n- Account 6310 has an open data-quality issue in the trial balance (TB_DUPLICATE_ACCOUNT_ROW). Check the entry still makes sense once that is resolved.\nOptions (none are applied automatically; each has been re-checked against the same rules):\n- JE-005-FIX-A (confidence 40%): Keep 6315 and add it to the COA as 'Conference Travel' under 6000 Operating Expenses. The description ('Reclass conference travel from old code') suggests 6315 is a deliberate new sub-account. That is a COA change and needs the COA owner's approval.\nConsidered and ruled out:\n- Mapping 6315 to 6310 Travel and Entertainment (score 0.533) was discarded on re-validation: JE_NO_NET_EFFECT: Every account in the entry is debited and credited by the same amount, so it changes nothing\nHuman decision: apply_fix by coa-owner@example.test (DEMO: new sub-account approved). Result: ACCEPTED_WITH_WARNINGS with JE-005-FIX-A.",
+    "explanation_source": "template",
+    "override": {
+      "action": "apply_fix",
+      "fix_id": "JE-005-FIX-A",
+      "approve_coa_change": true,
+      "coa_name": "Conference Travel",
+      "coa_parent": "6000",
+      "approver": "coa-owner@example.test",
+      "reason": "DEMO: new sub-account approved",
+      "result": "ACCEPTED_WITH_WARNINGS with JE-005-FIX-A"
+    },
+    "posted_lines": [
+      {
+        "account": "6315",
+        "debit": "18500.00",
+        "credit": "0.00",
+        "source": "overrides.json#JE-005->JE-005-FIX-A:JE-005.lines[0]"
+      },
+      {
+        "account": "6310",
+        "debit": "0.00",
+        "credit": "18500.00",
+        "source": "overrides.json#JE-005->JE-005-FIX-A:JE-005.lines[1]"
+      }
+    ]
+  },
+  {
+    "entry_id": "JE-006",
+    "status": "ACCEPTED",
+    "findings": [],
+    "proposed_fixes": [],
+    "ruled_out": [],
+    "explanation": "**JE-006: Depreciation catch-up \u2014 Q4**\nAccepted. Will post as submitted.\nAll checks passed: balanced, valid accounts, in period, below materiality.",
+    "explanation_source": "template",
+    "override": null,
+    "posted_lines": [
+      {
+        "account": "6500",
+        "debit": "215000.00",
+        "credit": "0.00",
+        "source": "manual_adjustments.json#entries[5].lines[0]"
+      },
+      {
+        "account": "1211",
+        "debit": "0.00",
+        "credit": "215000.00",
+        "source": "manual_adjustments.json#entries[5].lines[1]"
+      }
+    ]
+  },
+  {
+    "entry_id": "JE-007",
+    "status": "ACCEPTED",
+    "findings": [],
+    "proposed_fixes": [],
+    "ruled_out": [],
+    "explanation": "**JE-007: Deferred tax true-up**\nAccepted. Will post as submitted.\nAll checks passed: balanced, valid accounts, in period, below materiality.",
+    "explanation_source": "template",
+    "override": null,
+    "posted_lines": [
+      {
+        "account": "8200",
+        "debit": "38000.00",
+        "credit": "0.00",
+        "source": "manual_adjustments.json#entries[6].lines[0]"
+      },
+      {
+        "account": "1250",
+        "debit": "0.00",
+        "credit": "38000.00",
+        "source": "manual_adjustments.json#entries[6].lines[1]"
+      }
+    ]
+  },
+  {
+    "entry_id": "JE-008",
+    "status": "REJECTED",
+    "findings": [
+      {
+        "code": "JE_NO_NET_EFFECT",
+        "severity": "FATAL",
+        "entry_id": "JE-008",
+        "title": "Every account in the entry is debited and credited by the same amount, so it changes nothing",
+        "facts": {
+          "accounts": [
+            "2170"
+          ],
+          "gross_amount": "320000.00",
+          "possible_intents": [
+            "A cash settlement: debit 2170, credit 1110 Cash for 320,000.00",
+            "The UK subsidiary's side of the settlement (its IC receivable), which belongs in the UK entity's books, not this one"
+          ]
+        },
+        "refs": [
+          "manual_adjustments.json#entries[7].lines[0]",
+          "manual_adjustments.json#entries[7].lines[1]"
+        ]
+      },
+      {
+        "code": "JE_INTERCOMPANY_NO_COUNTERPARTY",
+        "severity": "WARNING",
+        "entry_id": "JE-008",
+        "title": "Intercompany entry has no counterparty entity or matching IC receivable, so it cannot be paired for elimination",
+        "facts": {
+          "accounts": [
+            "2170"
+          ]
+        },
+        "refs": [
+          "manual_adjustments.json#entries[7].lines[0]",
+          "manual_adjustments.json#entries[7].lines[1]"
+        ]
+      }
+    ],
+    "proposed_fixes": [],
+    "ruled_out": [],
+    "explanation": "**JE-008: Intercompany settlement \u2014 UK sub**\nRejected. Not posted, and there is no safe automatic fix. The preparer needs to resubmit.\nWhat is wrong:\n- It debits and credits the same account (2170) by 320,000.00. The two lines cancel, so posting it would change no balance while adding a 320,000.00 entry to the audit trail that looks like a real settlement. It may have been meant as: A cash settlement: debit 2170, credit 1110 Cash for 320,000.00; or The UK subsidiary's side of the settlement (its IC receivable), which belongs in the UK entity's books, not this one.\nPoints for the reviewer:\n- It touches the intercompany account but names no counterparty entity, so it cannot be matched against the other entity's books for elimination.\nNext step: the preparer should confirm what the entry was meant to do and submit a new one.\nHuman decision: accept_as_is by ap-clerk@example.test (DEMO: shows that a hard rule cannot be waived). Result: REFUSED: ['JE_NO_NET_EFFECT'] cannot be waived by an override.",
+    "explanation_source": "template",
+    "override": {
+      "action": "accept_as_is",
+      "acknowledge": [
+        "JE_NO_NET_EFFECT"
+      ],
+      "approver": "ap-clerk@example.test",
+      "reason": "DEMO: shows that a hard rule cannot be waived",
+      "result": "REFUSED: ['JE_NO_NET_EFFECT'] cannot be waived by an override"
+    },
+    "posted_lines": []
+  },
+  {
+    "entry_id": "JE-009",
+    "status": "ACCEPTED",
+    "findings": [],
+    "proposed_fixes": [],
+    "ruled_out": [],
+    "explanation": "**JE-009: Accrue legal fees for ongoing litigation**\nAccepted. Will post as submitted.\nAll checks passed: balanced, valid accounts, in period, below materiality.",
+    "explanation_source": "template",
+    "override": null,
+    "posted_lines": [
+      {
+        "account": "6400",
+        "debit": "75000.00",
+        "credit": "0.00",
+        "source": "manual_adjustments.json#entries[8].lines[0]"
+      },
+      {
+        "account": "2120",
+        "debit": "0.00",
+        "credit": "75000.00",
+        "source": "manual_adjustments.json#entries[8].lines[1]"
+      }
+    ]
+  },
+  {
+    "entry_id": "JE-010",
+    "status": "ACCEPTED",
+    "findings": [],
+    "proposed_fixes": [],
+    "ruled_out": [],
+    "explanation": "**JE-010: Reclass long-term debt current portion**\nAccepted. Will post as submitted.\nAll checks passed: balanced, valid accounts, in period, below materiality.",
+    "explanation_source": "template",
+    "override": null,
+    "posted_lines": [
+      {
+        "account": "2210",
+        "debit": "200000.00",
+        "credit": "0.00",
+        "source": "manual_adjustments.json#entries[9].lines[0]"
+      },
+      {
+        "account": "2140",
+        "debit": "0.00",
+        "credit": "200000.00",
+        "source": "manual_adjustments.json#entries[9].lines[1]"
+      }
+    ]
+  }
+]

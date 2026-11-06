@@ -1,0 +1,8 @@
+{
+  "_comment": "DEMO ONLY. These decisions are invented to show the human-in-the-loop path. A real file is written by the reviewer, one decision per entry, and is hashed into the run manifest.",
+  "JE-001": {"action": "sign_off", "approver": "controller@example.test", "reason": "DEMO: bonus pool agreed to the HR workbook v3"},
+  "JE-002": {"action": "apply_fix", "fix_id": "JE-002-FIX-A", "approver": "controller@example.test", "reason": "DEMO: assume controller note shows 28,500"},
+  "JE-003": {"action": "apply_fix", "fix_id": "JE-003-FIX-A", "approver": "controller@example.test", "reason": "DEMO: pipeline remeasures EUR cash, manual reval withdrawn"},
+  "JE-005": {"action": "apply_fix", "fix_id": "JE-005-FIX-A", "approve_coa_change": true, "coa_name": "Conference Travel", "coa_parent": "6000", "approver": "coa-owner@example.test", "reason": "DEMO: new sub-account approved"},
+  "JE-008": {"action": "accept_as_is", "acknowledge": ["JE_NO_NET_EFFECT"], "approver": "ap-clerk@example.test", "reason": "DEMO: shows that a hard rule cannot be waived"}
+}
